@@ -3,7 +3,11 @@
     "allow": [
       "Bash(cargo:*)",
       "Bash(./target/release/download-from-server:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(chmod:*)",
+      "Bash(./install.sh:*)",
+      "Bash(./uninstall.sh:*)",
+      "Bash(tree:*)"
     ],
     "deny": [],
     "ask": []

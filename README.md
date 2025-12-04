@@ -24,6 +24,28 @@
 
 ### Installation
 
+#### Method 1: Easy Install Script (Recommended)
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/downloader.git
+cd downloader
+
+# Run the installer
+./install.sh
+```
+
+The installer will:
+- Check system requirements and install Rust if needed
+- Build the binary from source
+- Ask for installation type:
+  - **User-only** (recommended) - Installs to `~/.local/bin`
+  - **System-wide** - Installs to `/usr/local/bin` (requires sudo)
+- Create a short alias `dfs` for convenience
+- Add to PATH if needed
+
+#### Method 2: Manual Installation
+
 ```bash
 # Clone the repository
 git clone https://github.com/yourusername/downloader.git
@@ -36,21 +58,40 @@ cargo build --release
 cargo install --path .
 ```
 
+#### Uninstallation
+
+To remove the tool completely:
+
+```bash
+# From the project directory
+./uninstall.sh
+```
+
+This will remove the binary, symlink, and optionally configuration files.
+
 ### Basic Usage
+
+After installation, you can use either the full command or the short alias:
 
 1. **Add a server configuration:**
    ```bash
    download-from-server add
+   # or using the alias:
+   dfs add
    ```
 
 2. **Download a file:**
    ```bash
    download-from-server download myserver /path/to/remote/file.txt
+   # or using the alias:
+   dfs download myserver /path/to/remote/file.txt
    ```
 
 3. **List all servers:**
    ```bash
    download-from-server list
+   # or using the alias:
+   dfs list
    ```
 
 ## 📖 Detailed Usage
@@ -133,7 +174,33 @@ download-from-server remove myserver
 
 You'll be asked to confirm before removal.
 
-## ⚙️ Configuration
+## ⚙️ Installation Details
+
+### Install Script Features
+
+The `install.sh` script provides a user-friendly installation experience:
+
+- **System Detection** - Automatically detects macOS/Linux and CPU architecture
+- **Rust Management** - Installs Rust if not present
+- **Installation Types**:
+  - **User-only** (`~/.local/bin`): No sudo required, safer choice
+  - **System-wide** (`/usr/local/bin`): Available to all users, requires sudo
+- **PATH Configuration** - Automatically adds installation directory to PATH
+- **Symlink Creation** - Creates `dfs` alias for quick access
+- **Verification** - Confirms installation was successful
+
+### Command Line Options
+
+```bash
+# Interactive installation
+./install.sh
+
+# Non-interactive options
+./install.sh --user    # Install for current user only
+./install.sh --system  # Install system-wide (requires sudo)
+```
+
+## 🔧 Configuration
 
 Server configurations are stored in `~/.downloader-from-server/config.json`:
 
